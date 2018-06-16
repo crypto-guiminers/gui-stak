@@ -113,7 +113,7 @@ extern const char sHtmlCssFile [] =
 
 size_t sHtmlCssSize = sizeof(sHtmlCssFile) - 1;
 
-extern const char sHttpAuthRelam[] = "XMR-Stak-Miner";
+extern const char sHttpAuthRelam[] = "GUI-Stak-Miner";
 extern const char sHttpAuthOpaque[] = "6c071f0df539e234cadbcd79164af7a594e23ab42bccb834df796aead6ce96e4";
 
 extern const char sHtmlAccessDenied[] =
@@ -132,7 +132,7 @@ extern const char sHtmlCommonHeader [] =
 	"<body>"
 	"<div class='all'>"
 	"<div class='version'>%s</div>"
-	"<div class='header'><span style='color: rgb(255, 160, 0)'>XMR</span>-Stak Monero Miner</div>"
+	"<div class='header'><span style='color: rgb(255, 160, 0)'>GUI</span>-Stak</div>"
 
 	"<div class='flex-container'>"
 		"<div class='links flex-item'>"
@@ -245,4 +245,3 @@ extern const char sJsonApiFormat [] =
 		"\"error_log\":[%s]"
 	"}"
 "}";
-

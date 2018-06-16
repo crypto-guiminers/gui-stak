@@ -434,6 +434,19 @@ void executor::on_miner_result(size_t pool_id, job_result& oResult)
 	}
 
 	size_t t_start = get_timestamp_ms();
+	// bool bResult;
+	// if(pool->is_dev_pool())
+	// {
+	// 	bResult = pool->cmd_submit(oResult.sJobID, oResult.iNonce, oResult.bResult, backend_name,
+	// 	backend_hashcount, total_hashcount, jconf::inst()->GetCurrentCoinSelection().GetDescription(0).GetMiningAlgo()
+	// 	);
+	// }
+	// else
+	// {
+	// 	bResult = pool->cmd_submit(oResult.sJobID, oResult.iNonce, oResult.bResult,
+	// 		backend_name, backend_hashcount, total_hashcount, jconf::inst()->GetCurrentCoinSelection().GetDescription(1).GetMiningAlgo()
+	// 	);
+	// }
 	bool bResult = pool->cmd_submit(oResult.sJobID, oResult.iNonce, oResult.bResult,
 		backend_name, backend_hashcount, total_hashcount, jconf::inst()->GetCurrentCoinSelection().GetDescription(1).GetMiningAlgo()
 	);
@@ -448,12 +461,14 @@ void executor::on_miner_result(size_t pool_id, job_result& oResult)
 		uint64_t* targets = (uint64_t*)oResult.bResult;
 		log_result_ok(jpsock::t64_to_diff(targets[3]));
 		printer::inst()->print_msg(L3, "Result accepted by the pool.");
+		//printer::inst()->print_msg(L1, "Result accepted by pool [%s]", pool->get_pool_addr());
 	}
 	else
 	{
 		if(!pool->have_sock_error())
 		{
 			printer::inst()->print_msg(L3, "Result rejected by the pool.");
+			//printer::inst()->print_msg(L1, "Result rejected by pool [%s]", pool->get_pool_addr());
 
 			std::string error = pool->get_call_error();
 
@@ -566,6 +581,9 @@ void executor::ex_main()
 			pools.emplace_front(0, "donate.xmr-stak.net:8800", "", "", "", 0.0, true, true, "", false);
 		else
 			pools.emplace_front(0, "donate.xmr-stak.net:5500", "", "", "", 0.0, true, false, "", false);
+		break;
+	case cryptonight_stellite:
+			pools.emplace_front(0, "donate.stellite.cash:3333", "", "", "", 0.0, true, false, "", false);
 		break;
 	case cryptonight_ipbc:
 	case cryptonight_aeon:
